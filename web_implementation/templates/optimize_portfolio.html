@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Optimize Investment Portfolio</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="{{ url_for('index') }}">Home</a>
+      </nav>
+    </header>
+    <main>
+      <h1>Optimize Investment Portfolio</h1>
+      <form method="POST">
+        <label for="sub_choice">Choose data source:</label>
+        <select name="sub_choice" id="sub_choice">
+          <option value="1">Current stocks</option>
+          <option value="2">Past stocks</option>
+          <option value="3">Selected stocks</option></select
+        ><br /><br />
+        <label for="initial_investment"
+          >Enter the amount you want to invest:</label
+        >
+        <input
+          type="text"
+          name="initial_investment"
+          id="initial_investment"
+          required
+        /><br /><br />
+        <div id="past_date_div" style="display: none">
+          <label for="past_date"
+            >Enter the date for past stock analysis (YYYY-MM-DD):</label
+          >
+          <input type="text" name="past_date" id="past_date" /><br /><br />
+        </div>
+        <div id="selected_stocks_div" style="display: none">
+          <label for="selected_stocks">Choose stocks:</label>
+          <select name="selected_stocks" id="selected_stocks" multiple>
+            {% for stock in stocks %}
+            <option value="{{ stock }}">{{ stock }}</option>
+            {% endfor %}</select
+          ><br /><br />
+        </div>
+        <input type="submit" value="Optimize Portfolio" />
+      </form>
+      {% if portfolio %}
+      <h2>Optimized Portfolio:</h2>
+      <ul>
+        {% for stock, (amount, weight) in portfolio.items() %}
+        <li>
+          {{ stock }}: ${{ "%.2f"|format(amount) }} ({{ "%.2f"|format(weight *
+          100) }}%)
+        </li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      <a href="{{ url_for('index') }}" class="button">Back to Home</a>
+    </main>
+    <script>
+      document
+        .getElementById("sub_choice")
+        .addEventListener("change", function () {
+          var pastDateDiv = document.getElementById("past_date_div");
+          var selectedStocksDiv = document.getElementById(
+            "selected_stocks_div"
+          );
+          if (this.value == "2") {
+            pastDateDiv.style.display = "block";
+            selectedStocksDiv.style.display = "none";
+          } else if (this.value == "3") {
+            pastDateDiv.style.display = "none";
+            selectedStocksDiv.style.display = "block";
+          } else {
+            pastDateDiv.style.display = "none";
+            selectedStocksDiv.style.display = "none";
+          }
+        });
+    </script>
+  </body>
+</html>

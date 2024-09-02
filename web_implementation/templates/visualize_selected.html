@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Visualize Performance of Selected Stocks</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="{{ url_for('index') }}">Home</a>
+      </nav>
+    </header>
+    <main>
+      <h1>Visualize Performance of Selected Stocks for the Past Month</h1>
+      <form method="POST">
+        <label for="selected_stocks">Choose stocks:</label>
+        <select name="selected_stocks" id="selected_stocks" multiple required>
+          {% for stock in stocks %}
+          <option value="{{ stock }}">{{ stock }}</option>
+          {% endfor %}</select
+        ><br /><br />
+        <input type="submit" value="Visualize" />
+      </form>
+      {% if plot_url %}
+      <h2>Performance of Selected Stocks:</h2>
+      <img src="data:image/png;base64,{{ plot_url }}" />
+      {% endif %}
+      <a href="{{ url_for('index') }}" class="button">Back to Home</a>
+    </main>
+  </body>
+</html>

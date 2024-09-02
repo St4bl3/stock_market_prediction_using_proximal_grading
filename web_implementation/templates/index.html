@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Stock Portfolio Optimizer</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="{{ url_for('index') }}">Home</a>
+      </nav>
+    </header>
+    <main>
+      <h1>Stock Portfolio Optimizer</h1>
+      <ul>
+        <li>
+          <a href="{{ url_for('optimize_portfolio_route') }}" class="button"
+            >Optimize Investment Portfolio</a
+          >
+        </li>
+        <li>
+          <a href="{{ url_for('worst_performing_route') }}" class="button"
+            >Analyze Worst Performing Stocks</a
+          >
+        </li>
+        <li>
+          <a href="{{ url_for('visualize_performance_route') }}" class="button"
+            >Visualize Performance Metrics</a
+          >
+        </li>
+        <li>
+          <a href="{{ url_for('predict_returns_route') }}" class="button"
+            >Predict Returns for a Specific Stock</a
+          >
+        </li>
+        <li>
+          <a href="{{ url_for('visualize_stock_route') }}" class="button"
+            >Visualize Performance of a Specific Stock</a
+          >
+        </li>
+        <li>
+          <a href="{{ url_for('visualize_selected_route') }}" class="button"
+            >Visualize Performance of Selected Stocks for the Past Month</a
+          >
+        </li>
+      </ul>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Visualize Performance of a Specific Stock</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="{{ url_for('index') }}">Home</a>
+      </nav>
+    </header>
+    <main>
+      <h1>Visualize Performance of a Specific Stock</h1>
+      <form method="POST">
+        <label for="stock_name">Enter the stock name:</label>
+        <input
+          type="text"
+          name="stock_name"
+          id="stock_name"
+          required
+        /><br /><br />
+        <label for="start_date">Enter the start date (YYYY-MM-DD):</label>
+        <input
+          type="text"
+          name="start_date"
+          id="start_date"
+          required
+        /><br /><br />
+        <label for="end_date">Enter the end date (YYYY-MM-DD):</label>
+        <input type="text" name="end_date" id="end_date" required /><br /><br />
+        <input type="submit" value="Visualize" />
+      </form>
+      {% if plot_url %}
+      <h2>
+        Performance of {{ stock_name }} from {{ start_date }} to {{ end_date }}:
+      </h2>
+      <img src="data:image/png;base64,{{ plot_url }}" />
+      {% endif %}
+      <a href="{{ url_for('index') }}" class="button">Back to Home</a>
+    </main>
+  </body>
+</html>

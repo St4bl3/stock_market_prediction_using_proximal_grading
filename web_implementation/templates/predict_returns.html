@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Predict Returns for a Specific Stock</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="{{ url_for('index') }}">Home</a>
+      </nav>
+    </header>
+    <main>
+      <h1>Predict Returns for a Specific Stock</h1>
+      <form method="POST">
+        <label for="stock_name">Enter the stock name:</label>
+        <input
+          type="text"
+          name="stock_name"
+          id="stock_name"
+          required
+        /><br /><br />
+        <input type="submit" value="Predict" />
+      </form>
+      {% if mean_return is not none %}
+      <h2>Predicted Returns for {{ stock_name }}:</h2>
+      <p>Mean Return: {{ "%.2f"|format(mean_return * 100) }}%</p>
+      <p>Return Variance: {{ "%.4f"|format(cov_return) }}</p>
+      {% endif %}
+      <a href="{{ url_for('index') }}" class="button">Back to Home</a>
+    </main>
+  </body>
+</html>
